@@ -27,42 +27,41 @@ boolean leeg=true, isPressed = false;
 int getal, score = 0;
 //timer voor de fps te controleren
 Timer t=new Timer();
+int lives = 3;
+Heart[] hearts = new Heart[3];
+int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60;
+
     public HelloTVXlet() {
         
     }
 
     public void initXlet(XletContext context){
-      HStaticText hstR=new HStaticText("Q",scene.getWidth()/6 - size / 2,scene.getHeight() - size * 2,size,size);
-      HStaticText hstG=new HStaticText("S",scene.getWidth() * 3/6 - size / 2,scene.getHeight() - size * 2,size,size);
-      HStaticText hstB=new HStaticText("D",scene.getWidth() * 5/6 - size / 2,scene.getHeight() - size * 2,size,size);
       
+      
+      Instructions();
       scene.setBackgroundMode(HVisible.BACKGROUND_FILL);
       scene.setBackground(Color.BLACK);
-      hstR.setBackgroundMode(HVisible.BACKGROUND_FILL);
-      hstR.setBackground(Color.RED);
-      hstG.setBackgroundMode(HVisible.BACKGROUND_FILL);
-      hstG.setBackground(Color.GREEN);
-      hstB.setBackgroundMode(HVisible.BACKGROUND_FILL);
-      hstB.setBackground(Color.BLUE);
+      
       
       //maak een verzameling (repository), voeg hier de 4 pijltjes aan toe
       UserEventRepository rep = new UserEventRepository("naam");
       rep.addKey(HRcEvent.VK_COLORED_KEY_0);
       rep.addKey(HRcEvent.VK_COLORED_KEY_1);
+      rep.addKey(HRcEvent.VK_COLORED_KEY_2);
       rep.addKey(HRcEvent.VK_COLORED_KEY_3);
       rep.addKey(HRcEvent.VK_1);
       rep.addKey(HRcEvent.VK_2);
       rep.addKey(HRcEvent.VK_3);
+      rep.addKey(HRcEvent.VK_ENTER);
+      
       //gebruik het signleton van eventmanager om aan te geven
       // naar waar
       EventManager.getInstance().addUserEventListener(this,rep);
-      scene.add(hstR);
-      scene.add(hstG);
-      scene.add(hstB);
+      
       scene.validate();
       scene.setVisible(true);
       
-      
+      updateLevens();
       
       t.scheduleAtFixedRate(mtt, 2000, 1000);
     }
@@ -74,41 +73,101 @@ Timer t=new Timer();
     public void pauseXlet() {
      
     }
-
+    
     public void destroyXlet(boolean unconditional) {
      
     }
+    
+    public void Instructions(){
+      HStaticText hstR=new HStaticText("Q",scene.getWidth()/6 - size / 2,scene.getHeight() - size * 2,size,size);
+      HStaticText hstG=new HStaticText("S",scene.getWidth() * 3/6 - size / 2,scene.getHeight() - size * 2,size,size);
+      HStaticText hstB=new HStaticText("D",scene.getWidth() * 5/6 - size / 2,scene.getHeight() - size * 2,size,size);
+      
+      hstR.setBackgroundMode(HVisible.BACKGROUND_FILL);
+      hstR.setBackground(Color.RED);
+      hstG.setBackgroundMode(HVisible.BACKGROUND_FILL);
+      hstG.setBackground(Color.GREEN);
+      hstB.setBackgroundMode(HVisible.BACKGROUND_FILL);
+      hstB.setBackground(Color.BLUE);
+      
+      scene.add(hstR);
+      scene.add(hstG);
+      scene.add(hstB);
+        
+    }
+    
+    public void updateLevens()
+    {
+        System.out.println(lives);
+        
+        if(lives > 0)
+        {
+            for(int i = 0; i < MAXLIVES; i++)
+            {
+            //   if (hearts[i]!=null) scene.remove(hearts[i]);
+                if (hearts[i]==null)   
+                {
+                    hearts[i] = new Heart(scene.getWidth() - HEARTWIDTH * (i + 1), HEARTSHEIGHT , "FullHealth.png","NoHealth.png");
+                    scene.add(hearts[i]);
+                    scene.popToFront(hearts[i]);
+                }
+                
+                if(lives >= i + 1)
+                {
+                    hearts[i].rood=true;
+                    
+                } 
+                else {
+                     hearts[i].rood=false;
+                    
+                }
+                
+                hearts[i].repaint();
+
+               
+            }
+        }      else
+        {
+            scene.removeAll();
+            HStaticText lose = new HStaticText("YOU LOSE", (scene.getWidth() / 2 - size/2), (scene.getHeight() / 2 - size / 2), size, size);
+            scene.add(lose);
+        }
+    }
     public void run()
     {
-        
-        if (leeg)
-        {
-            nieuw=new HStaticText("",scene.getWidth() * 1/2 - size / 2,100,size,size);
-            
-            nieuw.setBackground(Color.GRAY);
-            nieuw.setBackgroundMode(HVisible.BACKGROUND_FILL);
-            scene.add(nieuw);
-            Random r=new Random();
-            getal=r.nextInt(3);
-            if (getal==1)      nieuw.setBackground(Color.RED);
-            if (getal==2)      nieuw.setBackground(Color.GREEN);
-            if (getal==0)      nieuw.setBackground(Color.BLUE);
-          
+        if (lives==0) return;
+            if (leeg)
+            {
+                nieuw=new HStaticText("",scene.getWidth() * 1/2 - size / 2,100,size,size);
 
+                nieuw.setBackground(Color.GRAY);
+                nieuw.setBackgroundMode(HVisible.BACKGROUND_FILL);
+                scene.add(nieuw);
+                Random r=new Random();
+                getal=r.nextInt(3);
+                if (getal==1)      nieuw.setBackground(Color.RED);
+                if (getal==2)      nieuw.setBackground(Color.GREEN);
+                if (getal==0)      nieuw.setBackground(Color.BLUE);
+
+
+
+                leeg=false;
+            }
+            else
+            {
+                leeg=true;
+            }
         
-            leeg=false;
+            scene.popToFront(nieuw);
+            scene.repaint();
         }
-        else
-        {
-            nieuw.setBackground(Color.GRAY);
-            leeg=true;
-        }
+  
         
         
-        scene.popToFront(nieuw);
-        scene.repaint();
+        
+       
  
-    }
+    
     
     
 // wordt met implement all abstract methods gedaan
@@ -136,6 +195,12 @@ Timer t=new Timer();
                         nieuw.setBackgroundMode(HVisible.BACKGROUND_FILL);
                         scene.add(nieuw);
                     }
+                    else
+                    {
+                        lives--;
+                        updateLevens();
+                    }
+                    nieuw.setBackground(Color.GRAY);
                 }
 
 
@@ -155,6 +220,12 @@ Timer t=new Timer();
                         nieuw.setBackgroundMode(HVisible.BACKGROUND_FILL);
                         scene.add(nieuw);
                     }
+                    else
+                    {
+                        lives--;
+                        updateLevens();
+                    }
+                    nieuw.setBackground(Color.GRAY);
                 }
             }
 
@@ -172,8 +243,23 @@ Timer t=new Timer();
                         nieuw.setBackgroundMode(HVisible.BACKGROUND_FILL);
                         scene.add(nieuw);
                     }
+                    else
+                    {
+                        lives--;
+                        updateLevens();
+                    }
+                    nieuw.setBackground(Color.GRAY);
                 }
 
+            }
+            if(lives == 0 && (e.getCode() == HRcEvent.VK_COLORED_KEY_2 || e.getCode() == HRcEvent.VK_ENTER))
+            {
+                scene.removeAll();
+                lives = 3;
+                score = 0;
+                Instructions();
+                hearts = new Heart[3];
+                updateLevens();
             }
             isPressed = true;
         }

@@ -1,28 +1,19 @@
 Signature-Version: 1.0
 Created-By: 1.6.0_16 (Sun Microsystems Inc.)
 BDJ-Signature-Version: 1.0
-SHA1-Digest-Manifest: NBLALk0LefUbixc9+NrGqMzs6Xw=
-
-Name: hellotvxlet/HelloTVXlet.class
-SHA1-Digest: Ce8WOnToPXrfY+M81kM/A8QxMxg=
-
-Name: hellotvxlet/Spaceship.class
-SHA1-Digest: 7KrXE/TzjtkDqIDRoY/uXZyv1dY=
+SHA1-Digest-Manifest: XTDTWdWqh6iF2MpPVxTjKVC5p2M=
 
 Name: hellotvxlet/HelloTVXlet$1.class
-SHA1-Digest: jL4rl+dtvgbj4VErj8qjkXfGCe4=
+SHA1-Digest: 9aoq5rOXBF6qZnjlNQQnHYyhJZA=
 
 Name: hellotvxlet/Invader.class
 SHA1-Digest: avV8zh51TJKApPTJTMFVXgN7oog=
 
-Name: hellotvxlet/Laser.class
-SHA1-Digest: 9eykvPT5O/1L6T5ayNIbnFelUkM=
+Name: hellotvxlet/HelloTVXlet$2.class
+SHA1-Digest: 2NH1I7KrbD/iKl5YZFtf2AUfmUQ=
 
 Name: hellotvxlet/MijnComponent.class
 SHA1-Digest: 3pRfeooDq9mchtOSbaxStQl0y0A=
-
-Name: hellotvxlet/bluray.HelloTVXlet.perm
-SHA1-Digest: 84ZO/rYCyy0JStmaLbg1GDVEFhQ=
 
 Name: hellotvxlet/Block.class
 SHA1-Digest: Gc4x5huA0lUiKHdR+OotrxuKA0I=
@@ -30,8 +21,29 @@ SHA1-Digest: Gc4x5huA0lUiKHdR+OotrxuKA0I=
 Name: hellotvxlet/Sprite.class
 SHA1-Digest: MaWrMjBHNYq7D/a3lPoOiHTj/wI=
 
+Name: hellotvxlet/Heart.class
+SHA1-Digest: 8I1RmButyRgcq+bBWdOxHh/WeHs=
+
+Name: hellotvxlet/HelloTVXlet.class
+SHA1-Digest: EIXNlKpidd81+VdJ1QsKFgZKaM4=
+
+Name: hellotvxlet/Spaceship.class
+SHA1-Digest: 7KrXE/TzjtkDqIDRoY/uXZyv1dY=
+
+Name: hellotvxlet/Laser.class
+SHA1-Digest: 9eykvPT5O/1L6T5ayNIbnFelUkM=
+
+Name: NoHealth.png
+SHA1-Digest: fpIozdSsuLKkSar9Acm9LQDVfqw=
+
+Name: hellotvxlet/bluray.HelloTVXlet.perm
+SHA1-Digest: 84ZO/rYCyy0JStmaLbg1GDVEFhQ=
+
 Name: hellotvxlet/Levend.class
 SHA1-Digest: PT2v6/8hobDeftIcQ4wVjHdK0Kk=
+
+Name: FullHealth.png
+SHA1-Digest: LhJgYG5bdDzcreeWT3AThkgS4UQ=
 
 Name: hellotvxlet/MijnTimerTask.class
 SHA1-Digest: xIBuedi3RZswN7vVr0l7dD3MvVE=
