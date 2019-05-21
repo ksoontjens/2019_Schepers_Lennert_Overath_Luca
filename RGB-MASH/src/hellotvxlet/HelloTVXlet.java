@@ -23,13 +23,13 @@ MijnTimerTask mtt = new MijnTimerTask(this);
 HScene scene=HSceneFactory.getInstance().getDefaultHScene();
 HStaticText nieuw;
 HStaticText counter;
-boolean leeg=true, isPressed = false;
+boolean leeg=true, isPressed = false, firstCube = true;
 int getal, score = 0;
 //timer voor de fps te controleren
 Timer t=new Timer();
 int lives = 3;
 Heart[] hearts = new Heart[3];
-int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60;
+int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60, temp = 0, delay= 2000;
 
     public HelloTVXlet() {
         
@@ -63,7 +63,7 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60;
       
       updateLevens();
       
-      t.scheduleAtFixedRate(mtt, 2000, 1000);
+      t.schedule(mtt, 2000, delay);
     }
 
     public void startXlet() {
@@ -129,7 +129,7 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60;
         }      else
         {
             scene.removeAll();
-            HStaticText lose = new HStaticText("YOU LOSE", (scene.getWidth() / 2 - size/2), (scene.getHeight() / 2 - size / 2), size, size);
+            HStaticText lose = new HStaticText("YOU LOSE \nPress enter to restart",0,0, scene.getWidth(), scene.getHeight());
             scene.add(lose);
         }
     }
@@ -138,28 +138,48 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60;
         if (lives==0) return;
             if (leeg)
             {
+                System.out.println("box leeg");
                 nieuw=new HStaticText("",scene.getWidth() * 1/2 - size / 2,100,size,size);
-
                 nieuw.setBackground(Color.GRAY);
                 nieuw.setBackgroundMode(HVisible.BACKGROUND_FILL);
                 scene.add(nieuw);
                 Random r=new Random();
-                getal=r.nextInt(3);
+                
+                if(firstCube){
+                    getal=r.nextInt(3);
+                    firstCube = false;
+                }
+                else
+                {
+                    do
+                    {
+                        getal=r.nextInt(3);
+                        
+                    }while(getal == temp);
+                }
+                temp = getal;
+                
                 if (getal==1)      nieuw.setBackground(Color.RED);
                 if (getal==2)      nieuw.setBackground(Color.GREEN);
                 if (getal==0)      nieuw.setBackground(Color.BLUE);
-
-
 
                 leeg=false;
             }
             else
             {
+            nieuw.setBackground(Color.GRAY);
                 leeg=true;
             }
         
             scene.popToFront(nieuw);
             scene.repaint();
+            delay -= (delay / 50);
+            System.out.println("delay"+delay);
+            t.cancel();
+            t=new Timer();
+           mtt=new MijnTimerTask(this);
+            t.schedule(mtt, delay, delay);
+            System.out.println(delay);
         }
   
         
@@ -252,11 +272,12 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60;
                 }
 
             }
-            if(lives == 0 && (e.getCode() == HRcEvent.VK_COLORED_KEY_2 || e.getCode() == HRcEvent.VK_ENTER))
+            if(lives <= 0 && (e.getCode() == HRcEvent.VK_COLORED_KEY_2 || e.getCode() == HRcEvent.VK_ENTER))
             {
                 scene.removeAll();
                 lives = 3;
                 score = 0;
+                firstCube = true;
                 Instructions();
                 hearts = new Heart[3];
                 updateLevens();
