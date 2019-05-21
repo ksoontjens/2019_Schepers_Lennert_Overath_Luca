@@ -14,6 +14,7 @@ import org.havi.ui.HSceneFactory;
 import org.havi.ui.HStaticText;
 import java.util.Timer;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.Random;
 import org.havi.ui.HVisible;
 
@@ -64,6 +65,7 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60, temp = 0, delay= 2000;
       updateLevens();
       
       t.schedule(mtt, 2000, delay);
+      
     }
 
     public void startXlet() {
@@ -130,6 +132,7 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60, temp = 0, delay= 2000;
         {
             scene.removeAll();
             HStaticText lose = new HStaticText("YOU LOSE \nPress enter to restart",0,0, scene.getWidth(), scene.getHeight());
+            lose.setFont(Font.getFont("BOLD"));
             scene.add(lose);
         }
     }
@@ -279,6 +282,7 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60, temp = 0, delay= 2000;
                 score = 0;
                 firstCube = true;
                 Instructions();
+                delay = 2000;
                 hearts = new Heart[3];
                 updateLevens();
             }
