@@ -5,7 +5,6 @@
 
 package hellotvxlet;
 
-import java.util.ArrayList;
 import java.util.TimerTask;
 
 /**
@@ -21,7 +20,7 @@ public class MijnTimerTask extends TimerTask{
         this.htv=htv;
     }
     public void run(){
-htv.run();
+    htv.run();
     }
 
 }
