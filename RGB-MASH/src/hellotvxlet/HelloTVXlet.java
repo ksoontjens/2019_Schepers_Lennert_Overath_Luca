@@ -81,9 +81,9 @@ int MAXLIVES = 3, HEARTSHEIGHT = 100, HEARTWIDTH = 60, temp = 0, delay= 2000;
     }
     
     public void Instructions(){
-      HStaticText hstR=new HStaticText("Q",scene.getWidth()/6 - size / 2,scene.getHeight() - size * 2,size,size);
-      HStaticText hstG=new HStaticText("S",scene.getWidth() * 3/6 - size / 2,scene.getHeight() - size * 2,size,size);
-      HStaticText hstB=new HStaticText("D",scene.getWidth() * 5/6 - size / 2,scene.getHeight() - size * 2,size,size);
+      HStaticText hstR=new HStaticText("1",scene.getWidth()/6 - size / 2,scene.getHeight() - size * 2,size,size);
+      HStaticText hstG=new HStaticText("2",scene.getWidth() * 3/6 - size / 2,scene.getHeight() - size * 2,size,size);
+      HStaticText hstB=new HStaticText("3",scene.getWidth() * 5/6 - size / 2,scene.getHeight() - size * 2,size,size);
       
       hstR.setBackgroundMode(HVisible.BACKGROUND_FILL);
       hstR.setBackground(Color.RED);
